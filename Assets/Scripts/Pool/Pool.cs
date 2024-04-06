@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-namespace Pooling
+namespace Pool
 {
     public class ObjectPool : Singleton<ObjectPool>
     {
@@ -15,8 +15,8 @@ namespace Pooling
         private void Awake()
         {
             InitializeObjectPools();
-            DontDestroyOnLoad(this.gameObject);
-            DOVirtual.DelayedCall(2f, () => { SceneManager.LoadScene(1); });
+            //DontDestroyOnLoad(this.gameObject);
+            //DOVirtual.DelayedCall(2f, () => { SceneManager.LoadScene(1); });
         }
 
         private void InitializeObjectPools()
@@ -51,21 +51,37 @@ namespace Pooling
 
         public GameObject GetObjectFromPool(ObjectPoolItem.GemType gemType, Vector3 pos)
         {
-            switch (gemType)
-            {
-                case ObjectPoolItem.GemType.Red:
-                    _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Red)!.prefab;
-                    break;
-                case ObjectPoolItem.GemType.Blue:
-                    _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Blue)!.prefab;
-                    break;
-                case ObjectPoolItem.GemType.Green:
-                    _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Green)!.prefab;
-                    break;
-                case ObjectPoolItem.GemType.Yellow:
-                    _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Yellow)!.prefab;
-                    break;
-            }
+            _obj = objectPoolItems.FirstOrDefault(x => x.type == gemType)!.prefab;
+            // switch (gemType)
+            // {
+            //     case ObjectPoolItem.GemType.Red:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Red)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Blue:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Blue)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Green:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Green)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Yellow:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Yellow)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Orange:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Orange)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Purple:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Purple)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Bomb:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Bomb)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Horizontal:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Horizontal)!.prefab;
+            //         break;
+            //     case ObjectPoolItem.GemType.Vertical:
+            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Vertical)!.prefab;
+            //         break;
+            // }
 
             if (_objectPoolDictionary.ContainsKey(_obj))
             {
