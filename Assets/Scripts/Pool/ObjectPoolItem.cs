@@ -1,4 +1,7 @@
+using Base;
+using GemTypes;
 using UnityEngine;
+using Grid = Base.Grid;
 
 namespace Pool
 {
@@ -6,6 +9,7 @@ namespace Pool
     public class ObjectPoolItem
     {
         public GameObject prefab;
+        public Grid GridObject;
         public GemType type;
         public int initialPoolSize;
 

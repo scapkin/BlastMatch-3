@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3982325020940720344}
   - component: {fileID: 980874802751592417}
   - component: {fileID: 4327111535413946050}
+  - component: {fileID: 9073926856747190909}
   m_Layer: 0
   m_Name: VerticalRocketReferance
   m_TagString: Gem
@@ -143,3 +144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215c6dacdf3a85f4c861059b8154c862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9073926856747190909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573760692265700636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96fb24e08e69426a9ef1de6451ca52de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
