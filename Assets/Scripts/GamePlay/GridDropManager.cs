@@ -2,21 +2,22 @@ using System.Collections.Generic;
 using System.Numerics;
 using DG.Tweening;
 using GemTypes;
+using Pool;
 
 namespace GamePlay
 {
     public class GridDropManager
     {
-        public static void Drop(GridObject[,] _gridArray ,List<GridObject> dropList)
+        public static void Drop(Cell[,] gridArray ,List<Cell> dropList)
         {
             Dictionary<int, int> minYValues = new Dictionary<int, int>();
             int count = 0;
 
             // Find the lowest y value for each x value
-            foreach (GridObject obj in dropList)
+            foreach (Cell obj in dropList)
             {
-                int x = obj.PosX;
-                int y = obj.PosY;
+                int x = obj.GridObject.PosX;
+                int y = obj.GridObject.PosY;
 
                 if (!minYValues.ContainsKey(x) || y < minYValues[x])
                 {
@@ -27,21 +28,21 @@ namespace GamePlay
             foreach (KeyValuePair<int, int> kvp in minYValues)
             {
                 //x: kvp.Key -- y: kvp.Value
-                for (int i = kvp.Value; i < _gridArray.GetLength(0); i++)
+                for (int i = kvp.Value; i < gridArray.GetLength(0); i++)
                 {
-                    if (_gridArray[kvp.Key, i] != null)
+                    if (gridArray[kvp.Key, i] != null)
                     {
-                        GridManager.SetGridAction?.Invoke(_gridArray[kvp.Key, i], kvp.Key, i - count);
-                        _gridArray[kvp.Key, i] = null;
+                        GridManager.SetGridAction?.Invoke(gridArray[kvp.Key, i], kvp.Key, i - count);
+                        gridArray[kvp.Key, i] = null;
                     }
                     else
                     {
                         count++;
                     }
                 }
-                for (int i = 8 - count; i < 8; i++)
+                for (int i = gridArray.GetLength(0) - count; i < gridArray.GetLength(0); i++)
                 {
-                    GridSpawner.CreateNevGridAction?.Invoke(kvp.Key, i);
+                    GridSpawner.CreateNewGridAction?.Invoke(kvp.Key, i, ObjectPoolItem.GemType.Normal);
                 }
                 count = 0;
             }

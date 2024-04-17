@@ -5,10 +5,11 @@ namespace Base
 {
     public abstract class Grid: MonoBehaviour
     {
-        protected int x;
-        protected int y;
-        protected GameObject Gem;
-        protected ObjectPoolItem.GemType _type;
+        public bool isCheck = false;
+        public int x;
+        public int y;
+        public GameObject Gem;
+        public ObjectPoolItem.GemType _type;
         
         public int PosX
         {

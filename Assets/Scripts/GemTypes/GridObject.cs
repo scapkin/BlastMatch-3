@@ -9,7 +9,6 @@ namespace GemTypes
 {
     public class GridObject: Grid,IInteractable
     {
-        public bool isCheck = false;
         public void OnInteract()
         {
             GridManager.CheckGridConnectionAction?.Invoke(x,y);

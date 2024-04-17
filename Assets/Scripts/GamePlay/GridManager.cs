@@ -4,47 +4,49 @@ using DG.Tweening;
 using GemTypes;
 using ScriptableObject;
 using UnityEngine;
+using Pool;
+using Grid = Base.Grid;
 
 namespace GamePlay
 {
     public class GridManager : MonoBehaviour
     {
-        public static Action<GridObject> AddGridObjectAction;
+        public static Action<Cell> AddGridObjectAction;
         public static Action<int,int> CheckGridConnectionAction;
-        public static Action<GridObject,int,int> SetGridAction;
+        public static Action<Cell,int,int> SetGridAction;
         [SerializeField] private GridProperties gridProperties;
-    
-        private int _colLength;
-        private int _rowLength;
-        private GridObject[,] _gridArray = new GridObject[8, 8];
-        private List<GridObject> _connectedGridObjects = new List<GridObject>();
+
+        private Cell[,] _gridArray;
+        private List<Cell> _connectedGridObjects = new List<Cell>();
 
         private void Awake()
         {
-            _colLength = gridProperties.GridSize;
-            _rowLength = gridProperties.GridSize;
-            _gridArray = new GridObject[_colLength, _rowLength];
-            
+            _gridArray = new Cell[gridProperties.GridSize, gridProperties.GridSize];
+            Debug.Log(gridProperties.GridSize);
         }
 
         private void OnEnable()
         {
             CheckGridConnectionAction += CheckGridConnection;
-            AddGridObjectAction += OnAddGridObject;
+            AddGridObjectAction += AddGridObject;
             SetGridAction += SetGrid;
         }
         private void OnDisable()
         {
             CheckGridConnectionAction -= CheckGridConnection;
-            AddGridObjectAction -= OnAddGridObject;
+            AddGridObjectAction -= AddGridObject;
             SetGridAction -= SetGrid;
         }
     
         private void CheckGridConnection(int x,int y)
         {
-            _connectedGridObjects = ConnectionController.Instance.GetConnectedObjects(_gridArray, _gridArray[x,y].PosX, _gridArray[x,y].PosY, _gridArray[x,y].Type);
-            GridRemover.RemoveGridObject(_gridArray,_connectedGridObjects);
-            GridDropManager.Drop(_gridArray,_connectedGridObjects);
+            _connectedGridObjects = ConnectionController.Instance.GetConnectedObjects(_gridArray, _gridArray[x,y].GridObject.PosX, _gridArray[x,y].GridObject.PosY, _gridArray[x,y].GridObject.Type);
+            GridRemover.RemoveGridObject(_gridArray,_connectedGridObjects,x,y);
+            // if (_connectedGridObjects.Count>5)
+            // {
+            //     GridSpawner.CreateNewGridAction?.Invoke(x,y, ObjectPoolItem.GemType.Bomb);
+            // }
+            // GridDropManager.Drop(_gridArray,_connectedGridObjects);
             GridTest();
             _connectedGridObjects.Clear();
         }
@@ -66,22 +68,23 @@ namespace GamePlay
             Debug.Log(count);
         }
     
-        private void OnAddGridObject(GridObject obj)
+        private void AddGridObject(Cell obj)
         {
-            _gridArray[obj.PosX, obj.PosY] = obj;
-            GridTransformMove(_gridArray[obj.PosX, obj.PosY], new Vector3(obj.PosX * -gridProperties.Space, obj.PosY * gridProperties.Space, 0));
+            //Debug.Log(obj.GridObject.PosX + " " + obj.GridObject.PosY+ " " + obj.GridObject.Type + " " + obj.GridObject.GemObject.name);
+            _gridArray[obj.GridObject.PosX, obj.GridObject.PosY] = obj;
+            GridTransformMove(_gridArray[obj.GridObject.PosX, obj.GridObject.PosY], new Vector3(obj.GridObject.PosX * -gridProperties.Space, obj.GridObject.PosY * gridProperties.Space, 0));
         }
-        private void GridTransformMove(GridObject grid, Vector3 pos)
+        private void GridTransformMove(Cell grid, Vector3 pos)
         {
-            grid.GemObject.transform.DOMove(pos, 0.3f);
+            grid.GridObject.GemObject.transform.DOMove(pos, 0.3f);
         }
         
-        private void SetGrid(GridObject obj, int x, int y)
+        private void SetGrid(Cell obj, int x, int y)
         {
             GridTransformMove(obj, new Vector3(x * -gridProperties.Space, y * gridProperties.Space, 0));
             _gridArray[x, y] = obj;
-            obj.PosX = x;
-            obj.PosY = y;
+            obj.GridObject.PosX = x;
+            obj.GridObject.PosY = y;
             
         }
         

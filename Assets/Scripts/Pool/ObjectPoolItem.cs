@@ -24,7 +24,8 @@ namespace Pool
             Bomb = 6,
             Horizontal = 7,
             Vertical = 8,
-            Background = 9
+            Background = 9,
+            Normal = 10
         }
     }
 }

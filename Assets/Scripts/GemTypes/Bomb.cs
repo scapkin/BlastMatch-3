@@ -10,7 +10,6 @@ namespace GemTypes
     {
         public void OnInteract()
         {
-            //TODO: Implement Bomb logic    
             GridManager.CheckGridConnectionAction?.Invoke(x,y);
         }
     }
