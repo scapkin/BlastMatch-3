@@ -10,13 +10,28 @@ namespace GamePlay
         private List<GridObject> _connectedObjects = new List<GridObject>();
 
 
+        public List<GridObject> GetConnectedObjects(GridObject[,] gridObjects, int x, int y,
+            ObjectPoolItem.GemType type)
+        {
+            FindConnectedObjects(gridObjects, x, y, type);
+            if (_connectedObjects.Count < 2)
+            {
+                _connectedObjects.Clear();
+            }
+
+            return _connectedObjects;
+        }
+        
         private void FindConnectedObjects(GridObject[,] gridObjects, int x, int y, ObjectPoolItem.GemType type)
         {
             if (x < 0 || y < 0 || x >= gridObjects.GetLength(0) || y >= gridObjects.GetLength(1))
                 return;
-
-            if (gridObjects[x, y].isCheck || gridObjects[x, y].Type != type)
+            if (gridObjects[x,y] == null)
                 return;
+            
+            if (gridObjects[x, y].isCheck || gridObjects[x, y].Type != type )
+                return;
+            
             if (gridObjects[x, y].Type == ObjectPoolItem.GemType.Bomb)
             {
                 BombEffect(gridObjects, x, y);
@@ -35,6 +50,7 @@ namespace GamePlay
                 return;
             }
 
+            
 
             gridObjects[x, y].isCheck = true;
 
@@ -49,17 +65,7 @@ namespace GamePlay
             FindConnectedObjects(gridObjects, x, y - 1, type);
         }
 
-        public List<GridObject> GetConnectedObjects(GridObject[,] gridObjects, int x, int y,
-            ObjectPoolItem.GemType type)
-        {
-            FindConnectedObjects(gridObjects, x, y, type);
-            if (_connectedObjects.Count < 2)
-            {
-                _connectedObjects.Clear();
-            }
-
-            return _connectedObjects;
-        }
+        
 
         private void BombEffect(GridObject[,] gridObjects, int x, int y)
         {

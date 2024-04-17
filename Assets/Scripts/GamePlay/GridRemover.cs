@@ -5,9 +5,9 @@ using Pool;
 
 namespace GamePlay
 {
-    public class GridRemover : Singleton<GridRemover>
+    public class GridRemover
     {
-        public void RemoveGridObject(GridObject[,] gridArray,List<GridObject> gridObjects)
+        public static void RemoveGridObject(GridObject[,] gridArray,List<GridObject> gridObjects)
         {
             foreach (var gridObject in gridObjects)
             {
@@ -15,6 +15,7 @@ namespace GamePlay
                 gridObject.isCheck = false;
                 ObjectPool.Instance.ReturnObjectToPool(gridObject.gameObject);
             }
+            
         }
     }
 }

@@ -1,4 +1,5 @@
 using Base;
+using GamePlay;
 using Interface;
 
 namespace GemTypes
@@ -7,7 +8,7 @@ namespace GemTypes
     {
         public void OnInteract()
         {
-            
+            GridManager.CheckGridConnectionAction?.Invoke(x,y);
         }
     }
 }

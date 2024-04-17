@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GemTypes;
 using Pool;
@@ -7,8 +8,10 @@ using Random = UnityEngine.Random;
 
 namespace GamePlay
 {
-    public class GridGenerator : MonoBehaviour
+    public class GridSpawner : MonoBehaviour
     {
+        public static Action<int,int> CreateNevGridAction;
+        
         [SerializeField] private GridProperties gridProperties;
 
         private int _width;
@@ -32,23 +35,24 @@ namespace GamePlay
             InitializeGrid();
         }
 
-    
+        private void OnEnable()
+        {
+            CreateNevGridAction += CreateGridObject;
+        }
+
+        private void OnDisable()
+        {
+            CreateNevGridAction -= CreateGridObject;
+        }
+
+
         private void InitializeGrid()
         {
             for (int i = 0; i < _width; i++)
             {
                 for (int j = 0; j < _height; j++)
                 {
-                    GetRandomGem();
-                    GemSpawn(ObjectPoolItem.GemType.Background, new Vector2((-i * _space), (j * _space)));
-                    _obj = GemSpawn((ObjectPoolItem.GemType)_rnd, new Vector2((-i * _space), (j * _space)));
-                    GridObject gem = _obj.GetComponent<GridObject>();
-                    gem.PosX = i;
-                    gem.PosY = j;
-                    gem.Type = (ObjectPoolItem.GemType)_rnd;
-                    gem.GemObject = _obj;
-                    GridManager.AddGridObjectAction?.Invoke(gem);
-                    //_initGridArray[i, j] = new GridObject(i, j, (ObjectPoolItem.GemType)_rnd, _obj);
+                    CreateGridObject(i,j);
                 }
             }
         }
@@ -67,9 +71,22 @@ namespace GamePlay
             _rnd = selectedGemEnumValues[_rnd];
         }
 
-        private GameObject GemSpawn(ObjectPoolItem.GemType type, Vector3 pos)
+        private GameObject GridSpawn(ObjectPoolItem.GemType type, Vector3 pos)
         {
             return ObjectPool.Instance.GetObjectFromPool(type, pos);
+        }
+        
+        private void CreateGridObject(int x, int y)
+        {
+            GetRandomGem();
+            GridSpawn(ObjectPoolItem.GemType.Background, new Vector2((-x * _space), (y * _space)));
+            _obj = GridSpawn((ObjectPoolItem.GemType)_rnd, new Vector2((-x * _space), (y * _space)));
+            GridObject gem = _obj.GetComponent<GridObject>();
+            gem.PosX = x;
+            gem.PosY = y;
+            gem.Type = (ObjectPoolItem.GemType)_rnd;
+            gem.GemObject = _obj;
+            GridManager.AddGridObjectAction?.Invoke(gem);
         }
     }
 }

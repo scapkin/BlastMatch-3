@@ -1,4 +1,5 @@
 using Base;
+using GamePlay;
 using Interface;
 using UnityEngine;
 using Grid = Base.Grid;
@@ -10,7 +11,7 @@ namespace GemTypes
         public void OnInteract()
         {
             //TODO: Implement Bomb logic    
-            
+            GridManager.CheckGridConnectionAction?.Invoke(x,y);
         }
     }
 }
