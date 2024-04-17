@@ -11,7 +11,6 @@ namespace GamePlay
     {
         [SerializeField] private GridProperties gridProperties;
 
-        private GridObject[,] _initGridArray;
         private int _width;
         private int _height;
         private float _space;
@@ -28,7 +27,6 @@ namespace GamePlay
             _width = gridProperties.GridSize;
             _height = gridProperties.GridSize;
             _space = gridProperties.Space;
-            _initGridArray = new GridObject[gridProperties.GridSize, gridProperties.GridSize];
 
             SelectedGemListFiller();
             InitializeGrid();
