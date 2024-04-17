@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d324173d78ee45db93f18bbc01d0fb24, type: 3}
+  m_Name: GridProperties
+  m_EditorClassIdentifier: 
+  GridSize: 8
+  Gems:
+  - Type: 0
+    Goal: 0
+  - Type: 1
+    Goal: 0
+  - Type: 2
+    Goal: 0
+  MoveCount: 30
+  GridBackgroundObject: {fileID: 6928453107269396256, guid: 32a4eba48da7cd4468cd1c7991afb47f, type: 3}
+  Space: 0.65
