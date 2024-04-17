@@ -52,36 +52,6 @@ namespace Pool
         public GameObject GetObjectFromPool(ObjectPoolItem.GemType gemType, Vector3 pos)
         {
             _obj = objectPoolItems.FirstOrDefault(x => x.type == gemType)!.prefab;
-            // switch (gemType)
-            // {
-            //     case ObjectPoolItem.GemType.Red:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Red)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Blue:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Blue)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Green:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Green)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Yellow:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Yellow)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Orange:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Orange)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Purple:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Purple)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Bomb:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Bomb)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Horizontal:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Horizontal)!.prefab;
-            //         break;
-            //     case ObjectPoolItem.GemType.Vertical:
-            //         _obj = objectPoolItems.FirstOrDefault(x => x.type == ObjectPoolItem.GemType.Vertical)!.prefab;
-            //         break;
-            // }
 
             if (_objectPoolDictionary.ContainsKey(_obj))
             {
