@@ -13,7 +13,7 @@ namespace GamePlay
     {
         public static Action<Cell> AddGridObjectAction;
         public static Action<int, int> CheckGridConnectionAction;
-        public static Action<Cell, int, int> SetGridAction;
+        public static Action<Cell, int, int> SetGridPosAction;
         [SerializeField] private GridProperties gridProperties;
 
         private Cell[,] _gridArray;
@@ -29,14 +29,14 @@ namespace GamePlay
         {
             CheckGridConnectionAction += CheckGridConnection;
             AddGridObjectAction += AddGridObject;
-            SetGridAction += SetGrid;
+            SetGridPosAction += SetGrid;
         }
 
         private void OnDisable()
         {
             CheckGridConnectionAction -= CheckGridConnection;
             AddGridObjectAction -= AddGridObject;
-            SetGridAction -= SetGrid;
+            SetGridPosAction -= SetGrid;
         }
 
         private void CheckGridConnection(int x, int y)
@@ -78,22 +78,6 @@ namespace GamePlay
             }
         }
 
-        private void GridTest()
-        {
-            int count = 0;
-            for (int i = 0; i < _gridArray.GetLength(0); i++)
-            {
-                for (int j = 0; j < _gridArray.GetLength(1); j++)
-                {
-                    if (_gridArray[i, j] == null)
-                    {
-                        count++;
-                    }
-                }
-            }
-
-            Debug.Log(count);
-        }
 
         private void AddGridObject(Cell obj)
         {

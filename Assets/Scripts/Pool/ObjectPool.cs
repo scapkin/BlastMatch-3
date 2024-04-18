@@ -15,8 +15,8 @@ namespace Pool
         private void Awake()
         {
             InitializeObjectPools();
-            //DontDestroyOnLoad(this.gameObject);
-            //DOVirtual.DelayedCall(2f, () => { SceneManager.LoadScene(1); });
+            DontDestroyOnLoad(this.gameObject);
+            DOVirtual.DelayedCall(1f, () => { SceneManager.LoadScene(1); });
         }
 
         private void InitializeObjectPools()

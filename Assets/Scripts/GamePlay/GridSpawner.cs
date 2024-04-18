@@ -96,8 +96,7 @@ namespace GamePlay
         private void CreateGridObject(int x, int y, ObjectPoolItem.GemType type, Cell.CellTypes cellTypes)
         {
             GetRandomGem(type);
-            //GridSpawn(ObjectPoolItem.GemType.Background, new Vector2((-x * _space), (y * _space)));
-            _obj = GridSpawn((ObjectPoolItem.GemType)_rnd, new Vector2((-x * _space), (y * _space)));
+            _obj = GridSpawn((ObjectPoolItem.GemType)_rnd, new Vector2((-x * _space), (_height * _space)));
             Cell gem = new Cell();
             gem.GridObject = _obj.GetComponent<Grid>();
             gem.GridObject.PosX = x;

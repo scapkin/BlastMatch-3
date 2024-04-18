@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4319759102974480771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4130726929495333951}
+  - component: {fileID: 7861728948832779578}
+  m_Layer: 0
+  m_Name: Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4130726929495333951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4319759102974480771}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7861728948832779578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4319759102974480771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96c584b5da8441aaacf2ed4b711849d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPoolItems:
+  - prefab: {fileID: 8019284392168896414, guid: 385d032f427423d479ab9ae007329cef, type: 3}
+    GridObject: {fileID: 8931408037255634036, guid: 385d032f427423d479ab9ae007329cef, type: 3}
+    type: 0
+    initialPoolSize: 50
+  - prefab: {fileID: 1007470806740868593, guid: 763b85e12b79ee94c8e6b843ca361a19, type: 3}
+    GridObject: {fileID: 3048817646192461332, guid: 763b85e12b79ee94c8e6b843ca361a19, type: 3}
+    type: 1
+    initialPoolSize: 50
+  - prefab: {fileID: 6814747949523517488, guid: a604cf0d09c0c634cb20fb99341ae1cc, type: 3}
+    GridObject: {fileID: -9050904376784963370, guid: a604cf0d09c0c634cb20fb99341ae1cc, type: 3}
+    type: 2
+    initialPoolSize: 50
+  - prefab: {fileID: 6752287315142691461, guid: f6e157c4b5c597347acdf41a60556721, type: 3}
+    GridObject: {fileID: -4348856575176042171, guid: f6e157c4b5c597347acdf41a60556721, type: 3}
+    type: 3
+    initialPoolSize: 50
+  - prefab: {fileID: 5600556308604702990, guid: f1686b8efc006384a873e486628d4dfd, type: 3}
+    GridObject: {fileID: -1253614373481769716, guid: f1686b8efc006384a873e486628d4dfd, type: 3}
+    type: 4
+    initialPoolSize: 50
+  - prefab: {fileID: 9151595634159051390, guid: 63c0ee0972345fe4990821d28afa47b4, type: 3}
+    GridObject: {fileID: 6760803155337230002, guid: 63c0ee0972345fe4990821d28afa47b4, type: 3}
+    type: 5
+    initialPoolSize: 50
+  - prefab: {fileID: 6928453107269396256, guid: 32a4eba48da7cd4468cd1c7991afb47f, type: 3}
+    GridObject: {fileID: 0}
+    type: 9
+    initialPoolSize: 64
+  - prefab: {fileID: 2336285209692402762, guid: c05662b55baf4f649ada6b3470aaac56, type: 3}
+    GridObject: {fileID: 6060608172135196658, guid: c05662b55baf4f649ada6b3470aaac56, type: 3}
+    type: 6
+    initialPoolSize: 50
+  - prefab: {fileID: 573760692265700636, guid: 2769f3895c592f64da0fdc72b5fdc20a, type: 3}
+    GridObject: {fileID: 9073926856747190909, guid: 2769f3895c592f64da0fdc72b5fdc20a, type: 3}
+    type: 8
+    initialPoolSize: 50
+  - prefab: {fileID: 8508899583143225056, guid: 279ffa5ab8eb816409b9910933d38bae, type: 3}
+    GridObject: {fileID: 1019908292713101188, guid: 279ffa5ab8eb816409b9910933d38bae, type: 3}
+    type: 7
+    initialPoolSize: 50

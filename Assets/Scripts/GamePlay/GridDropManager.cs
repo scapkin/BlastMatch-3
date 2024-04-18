@@ -32,7 +32,7 @@ namespace GamePlay
                 {
                     if (gridArray[kvp.Key, i] != null)
                     {
-                        GridManager.SetGridAction?.Invoke(gridArray[kvp.Key, i], kvp.Key, i - count);
+                        GridManager.SetGridPosAction?.Invoke(gridArray[kvp.Key, i], kvp.Key, i - count);
                         gridArray[kvp.Key, i] = null;
                     }
                     else
