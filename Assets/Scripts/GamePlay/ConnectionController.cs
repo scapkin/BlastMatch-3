@@ -15,11 +15,12 @@ namespace GamePlay
             ObjectPoolItem.GemType type)
         {
             FindConnectedObjects(gridObjects, x, y, type);
+            
             if (_connectedObjects.Count < 2)
             {
                 _connectedObjects.Clear();
             }
-
+            
             return _connectedObjects;
         }
         
@@ -32,24 +33,25 @@ namespace GamePlay
             if (gridObjects[x, y].GridObject.isCheck || gridObjects[x, y].GridObject.Type != type )
                 return;
             
-            if (gridObjects[x, y].GridObject.Type == ObjectPoolItem.GemType.Bomb)
+            if (gridObjects[x, y].CellType == Cell.CellTypes.Bomb)
             {
                 BombEffect(gridObjects, x, y);
                 return;
             }
 
-            if (gridObjects[x, y].GridObject.Type == ObjectPoolItem.GemType.Horizontal)
+            if (gridObjects[x, y].CellType == Cell.CellTypes.Horizontal)
             {
-                ExplodeHorizontal(gridObjects, x);
+                ExplodeHorizontal(gridObjects, y);
                 return;
             }
 
-            if (gridObjects[x, y].GridObject.Type == ObjectPoolItem.GemType.Vertical)
+            if (gridObjects[x, y].CellType == Cell.CellTypes.Vertical)
             {
-                ExplodeWidth(gridObjects, y);
+                ExplodeVerticle(gridObjects, x);
+                
                 return;
             }
-
+            
             
 
             gridObjects[x, y].GridObject.isCheck = true;
@@ -66,7 +68,24 @@ namespace GamePlay
         }
 
         
+        private void CheckConnectedObjectTypes(Cell[,] gridObjects,int x,int y)
+        {
+            if (gridObjects[x,y].CellType == Cell.CellTypes.Bomb)
+            {
+                BombEffect(gridObjects,gridObjects[x,y].GridObject.PosX,gridObjects[x,y].GridObject.PosY);
+            }
 
+            if (gridObjects[x,y].GridObject.Type == ObjectPoolItem.GemType.Vertical)
+            {
+                ExplodeVerticle(gridObjects, x);
+                
+            }
+
+            if (gridObjects[x,y].GridObject.Type == ObjectPoolItem.GemType.Horizontal)
+            {
+                ExplodeHorizontal(gridObjects, y);
+            }
+        }
         private void BombEffect(Cell[,] gridObjects, int x, int y)
         {
             for (int i = x - 1; i <= x + 1; i++)
@@ -75,71 +94,59 @@ namespace GamePlay
                 {
                     if (i >= 0 && i < gridObjects.GetLength(0) && j >= 0 && j < gridObjects.GetLength(1))
                     {
-                        if (gridObjects[i, j] != null)
+                        if (gridObjects[i, j] != null && !gridObjects[i, j].GridObject.isCheck)
                         {
-                            if (gridObjects[i, j].GridObject.Type == ObjectPoolItem.GemType.Bomb)
-                            {
-                                
-                            }
-
+                            gridObjects[i, j].GridObject.isCheck = true;
                             if (!_connectedObjects.Contains(gridObjects[i, j]))
                             {
+                                CheckConnectedObjectTypes(gridObjects,i,j);
+                                
+                                
                                 _connectedObjects.Add(gridObjects[i, j]);
                             }
                         }
                     }
                 }
             }
+            
         }
 
-        private void ExplodeHorizontal(Cell[,] gridObjects, int x)
+        private void ExplodeVerticle(Cell[,] gridObjects, int x)
         {
             int height = gridObjects.GetLength(1);
 
             for (int y = 0; y < height; y++)
             {
-                if (gridObjects[x, y] != null)
+                if (gridObjects[x, y] != null&& !gridObjects[x, y].GridObject.isCheck)
                 {
+                    gridObjects[x, y].GridObject.isCheck = true;
                     if (!_connectedObjects.Contains(gridObjects[x, y]))
                     {
+                        CheckConnectedObjectTypes(gridObjects,x,y);
                         _connectedObjects.Add(gridObjects[x, y]);
                     }
                 }
             }
         }
 
-        public void ExplodeWidth(Cell[,] gridObjects, int y)
+        public void ExplodeHorizontal(Cell[,] gridObjects, int y)
         {
             int width = gridObjects.GetLength(0);
 
             for (int x = 0; x < width; x++)
             {
-                if (gridObjects[x, y] != null)
+                if (gridObjects[x, y] != null&& !gridObjects[x, y].GridObject.isCheck)
                 {
+                    gridObjects[x, y].GridObject.isCheck = true;
                     if (!_connectedObjects.Contains(gridObjects[x, y]))
                     {
+                        CheckConnectedObjectTypes(gridObjects,x,y);
                         _connectedObjects.Add(gridObjects[x, y]);
                     }
                 }
             }
         }
 
-        private void CheckConnectedObjectTypes()
-        {
-            foreach (var obj in _connectedObjects)
-            {
-                if (obj.GridObject.Type == ObjectPoolItem.GemType.Bomb)
-                {
-                }
-
-                if (obj.GridObject.Type == ObjectPoolItem.GemType.Horizontal)
-                {
-                }
-
-                if (obj.GridObject.Type == ObjectPoolItem.GemType.Vertical)
-                {
-                }
-            }
-        }
+        
     }
 }

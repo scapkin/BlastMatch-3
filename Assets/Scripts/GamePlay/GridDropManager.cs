@@ -42,12 +42,10 @@ namespace GamePlay
                 }
                 for (int i = gridArray.GetLength(0) - count; i < gridArray.GetLength(0); i++)
                 {
-                    GridSpawner.CreateNewGridAction?.Invoke(kvp.Key, i, ObjectPoolItem.GemType.Normal);
+                    GridSpawner.CreateNewGridAction?.Invoke(kvp.Key, i, ObjectPoolItem.GemType.Normal, Cell.CellTypes.Normal);
                 }
                 count = 0;
             }
         }
-        
-        
     }
 }

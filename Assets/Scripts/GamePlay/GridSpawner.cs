@@ -12,7 +12,7 @@ namespace GamePlay
 {
     public class GridSpawner : MonoBehaviour
     {
-        public static Action<int,int,ObjectPoolItem.GemType > CreateNewGridAction;
+        public static Action<int,int,ObjectPoolItem.GemType,Cell.CellTypes > CreateNewGridAction;
         
         [SerializeField] private GridProperties gridProperties;
 
@@ -55,7 +55,7 @@ namespace GamePlay
                 for (int j = 0; j < _height; j++)
                 {
                     GridSpawn(ObjectPoolItem.GemType.Background, new Vector2((-i * _space), (j * _space)));
-                    CreateGridObject(i,j, ObjectPoolItem.GemType.Normal);
+                    CreateGridObject(i,j, ObjectPoolItem.GemType.Normal, Cell.CellTypes.Normal);
                 }
             }
         }
@@ -93,7 +93,7 @@ namespace GamePlay
             return ObjectPool.Instance.GetObjectFromPool(type, pos);
         }
         
-        private void CreateGridObject(int x, int y, ObjectPoolItem.GemType type)
+        private void CreateGridObject(int x, int y, ObjectPoolItem.GemType type, Cell.CellTypes cellTypes)
         {
             GetRandomGem(type);
             //GridSpawn(ObjectPoolItem.GemType.Background, new Vector2((-x * _space), (y * _space)));
@@ -103,6 +103,7 @@ namespace GamePlay
             gem.GridObject.PosX = x;
             gem.GridObject.PosY = y;
             gem.GridObject.Type = (ObjectPoolItem.GemType)_rnd;
+            gem.CellType = cellTypes;
             gem.GridObject.GemObject = _obj;
             GridManager.AddGridObjectAction?.Invoke(gem);
         }

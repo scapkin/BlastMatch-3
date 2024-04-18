@@ -8,7 +8,9 @@ namespace ScriptableObject
     [CreateAssetMenu(fileName = "GridProperties", menuName = "GridProperties", order = 0)]
     public class GridProperties : UnityEngine.ScriptableObject
     {
-        
+        public int BombMinRequirement = 7;
+        public int HorizontalMinRequirement = 5;
+        public int VerticalMinRequirement = 3;
         public int GridSize = 8;
         public List<Gem> Gems;
         public int MoveCount = 30;
